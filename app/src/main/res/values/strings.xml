@@ -15,4 +15,8 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="redirect_to_signup">New here? Click here to create your account</string>
     <string name="redirect_to_login">Already have an account? Click here to log in</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="posts">Posts</string>
+    <string name="profile">Profile</string>
 </resources>
