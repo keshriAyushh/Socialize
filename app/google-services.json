@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980148775706",
+    "firebase_url": "https://socialize-7d573-default-rtdb.firebaseio.com",
+    "project_id": "socialize-7d573",
+    "storage_bucket": "socialize-7d573.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980148775706:android:5e0015b4b0f0a06a2d9aa3",
+        "android_client_info": {
+          "package_name": "com.example.socialize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980148775706-e9vvdasjqjhdgrmin4hmmi89num379ln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.socialize",
+            "certificate_hash": "54f1d45293653e3eee0f13d111081bacf8964e40"
+          }
+        },
+        {
+          "client_id": "980148775706-o2r8v868h6pnbco5hadff9nektn9i3gb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWDgABzXBI2JKxU8H4umOXjuTiIrc-6yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980148775706-o2r8v868h6pnbco5hadff9nektn9i3gb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

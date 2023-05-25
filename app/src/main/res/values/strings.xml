@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Socialize</string>
+    <string name="act_signup_text1a">S</string>
+    <string name="act_signup_text1b">ocialize</string>
+    <string name="act_signup_text2">Enter your details below</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="act_signup_text3">Password must contain atleast 6 characters</string>
+    <string name="act_signup_symbol">*</string>
+    <string name="or">or</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="redirect_to_signup">New here? Click here to create your account</string>
+    <string name="redirect_to_login">Already have an account? Click here to log in</string>
+</resources>
