@@ -24,6 +24,7 @@ object StorageUtil {
 
     fun getInstance() = storageInstance
 
+    fun getPostCollection() = postCollection
     fun addUserToDb(user: User?) {
         user?.let {
             GlobalScope.launch(Dispatchers.IO) {
@@ -56,5 +57,28 @@ object StorageUtil {
 
     fun getUserById(uId: String): Task<DocumentSnapshot> {
         return usersCollection.document(uId).get()
+    }
+
+    fun getPostId(postId: String): Task<DocumentSnapshot> {
+        return postCollection.document(postId).get()
+    }
+
+
+    fun updateLikes(postId: String) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val currentUserId = AuthUtil.getInstance().currentUser!!.uid
+            val post = getPostId(postId).await().toObject(Post::class.java)
+
+             val isLiked = post?.likedBy?.contains(currentUserId)
+
+            if(isLiked!!) {
+                post.likedBy.remove(currentUserId)
+            } else {
+                post.likedBy.add(currentUserId)
+            }
+            postCollection.document(postId).set(post)
+        }
+
     }
 }

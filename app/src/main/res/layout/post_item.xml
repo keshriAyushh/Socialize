@@ -1,23 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:background="@color/matteBlack">
+    app:cardElevation="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="@color/matteBlack">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:fontFamily="@font/font2"
-        android:text="ITEM"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/account"
+            android:tint="@color/white"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="38dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPostedBy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/posted_by"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toEndOf="@id/ivProfilePicture"
+            app:layout_constraintTop_toTopOf="@id/ivProfilePicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tvPostedAt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hintColor"
+            android:textSize="12sp"
+            android:text="@string/posted_at"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/tvPostedBy"
+            app:layout_constraintEnd_toEndOf="@id/tvPostedBy"
+            app:layout_constraintTop_toBottomOf="@id/tvPostedBy"/>
+
+        <TextView
+            android:id="@+id/tvPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/post"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/heart"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPost" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share"
+            android:tint="@color/white"
+            android:layout_marginStart="14dp"
+            app:layout_constraintStart_toEndOf="@id/ivLike"
+            app:layout_constraintBottom_toBottomOf="@id/ivLike"
+            app:layout_constraintTop_toTopOf="@id/ivLike"/>
+
+        <TextView
+            android:id="@+id/tvLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/like_count"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivLike"
+            app:layout_constraintStart_toStartOf="@+id/ivLike"
+            app:layout_constraintTop_toBottomOf="@+id/ivLike" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
