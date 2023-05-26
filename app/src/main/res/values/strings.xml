@@ -20,8 +20,10 @@
     <string name="redirect_to_login">Already have an account? Click here to log in</string>
     <string name="posts">Posts</string>
     <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
     <string name="update">Update</string>
     <string name="profile">Profile</string>
+    <string name="upload_image">Upload Image</string>
     <string name="post_hint_text">What\'s on your mind?</string>
     <string name="posted_by">Posted by</string>
     <string name="posted_at">Posted at</string>

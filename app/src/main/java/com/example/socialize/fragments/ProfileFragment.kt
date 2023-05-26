@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.socialize.activities.LoginActivity
+import com.example.socialize.activities.UpdateProfileActivity
 import com.example.socialize.databinding.FragmentProfileBinding
 import com.example.socialize.model.User
 import com.example.socialize.util.AuthUtil
@@ -20,6 +22,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+
 
 class ProfileFragment : Fragment() {
 
@@ -45,6 +48,10 @@ class ProfileFragment : Fragment() {
             googleSignInClient.signOut()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            startActivity(Intent(requireActivity(), UpdateProfileActivity::class.java))
         }
         return binding.root
     }
@@ -73,6 +80,5 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-
     }
 }

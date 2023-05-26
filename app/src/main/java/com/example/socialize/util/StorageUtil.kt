@@ -81,4 +81,8 @@ object StorageUtil {
         }
 
     }
+
+    fun updateUser(userId: String, user: User) {
+        usersCollection.document(userId).set(user)
+    }
 }
