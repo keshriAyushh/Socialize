@@ -6,9 +6,12 @@
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="pass">Password</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
     <string name="confirm_pass">Confirm Password</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
     <string name="act_signup_text3">Password must contain atleast 6 characters</string>
     <string name="act_signup_symbol">*</string>
     <string name="or">or</string>
@@ -17,6 +20,7 @@
     <string name="redirect_to_login">Already have an account? Click here to log in</string>
     <string name="posts">Posts</string>
     <string name="post">Post</string>
+    <string name="update">Update</string>
     <string name="profile">Profile</string>
     <string name="post_hint_text">What\'s on your mind?</string>
     <string name="posted_by">Posted by</string>
