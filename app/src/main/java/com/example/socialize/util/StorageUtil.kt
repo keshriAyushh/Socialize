@@ -1,25 +1,60 @@
 package com.example.socialize.util
 
+import android.content.Context
+import android.widget.Toast
+import com.example.socialize.model.Post
 import com.example.socialize.model.User
-import com.google.firebase.database.FirebaseDatabase
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
+@OptIn(DelicateCoroutinesApi::class)
 object StorageUtil {
 
     private val storageInstance: FirebaseFirestore by lazy {
         FirebaseFirestore.getInstance()
     }
     private val usersCollection = storageInstance.collection("users")
+    private val postCollection = storageInstance.collection("posts")
+
     fun getInstance() = storageInstance
 
     fun addUserToDb(user: User?) {
         user?.let {
-            GlobalScope.launch(Dispatchers.IO){
+            GlobalScope.launch(Dispatchers.IO) {
                 usersCollection.document(user.userId).set(it)
             }
         }
+    }
+
+    fun addPost(postText: String, context: Context) {
+        val currentUserId = AuthUtil.getInstance().currentUser!!.uid
+
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val user = getUserById(currentUserId).await().toObject(User::class.java) //mapping the DocumentSnapshot to an object of User
+
+            val currentTime = System.currentTimeMillis()
+            val post = Post(postText, user, currentTime)
+
+            postCollection.document().set(post)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Post added successfully!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Post was not added, please try again!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        }
+    }
+
+    fun getUserById(uId: String): Task<DocumentSnapshot> {
+        return usersCollection.document(uId).get()
     }
 }

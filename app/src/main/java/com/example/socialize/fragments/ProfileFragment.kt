@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.socialize.activities.LoginActivity
 import com.example.socialize.databinding.FragmentProfileBinding
+import com.example.socialize.util.AuthUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -21,9 +22,9 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater)
-
+        auth = AuthUtil.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("980148775706-o2r8v868h6pnbco5hadff9nektn9i3gb.apps.googleusercontent.com")
             .requestEmail()
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment() {
         binding.btn.setOnClickListener {
             auth.signOut()
             googleSignInClient.signOut()
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
             requireActivity().finish()
         }
         return binding.root
