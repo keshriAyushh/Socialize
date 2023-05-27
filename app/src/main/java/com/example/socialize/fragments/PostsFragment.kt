@@ -46,6 +46,13 @@ class PostsFragment: Fragment(), IPostAdapter {
         postAdapter = PostsAdapter(recyclerViewOptions, this@PostsFragment)
         binding.recyclerView.adapter = postAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.itemAnimator = null
+        binding.swipeRefreshLayout.setOnRefreshListener {
+
+            // on below line we are setting is refreshing to false.
+            binding.swipeRefreshLayout.isRefreshing = false
+            postAdapter.notifyDataSetChanged()
+        }
 
     }
 

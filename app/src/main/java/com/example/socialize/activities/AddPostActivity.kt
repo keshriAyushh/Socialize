@@ -35,6 +35,9 @@ class AddPostActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnCancel.setOnClickListener {
+            finish()
+        }
     }
 
     private fun init() {

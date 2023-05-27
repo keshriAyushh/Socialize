@@ -7,6 +7,11 @@
     <string name="email">Email</string>
     <string name="pass">Password</string>
     <string name="age">Age</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Others</item>
+    </string-array>
     <string name="gender">Gender</string>
     <string name="confirm_pass">Confirm Password</string>
     <string name="sign_in">Sign in</string>
@@ -28,4 +33,6 @@
     <string name="posted_by">Posted by</string>
     <string name="posted_at">Posted at</string>
     <string name="like_count">COUNT</string>
+
+
 </resources>

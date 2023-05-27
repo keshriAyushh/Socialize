@@ -188,7 +188,7 @@
         android:fontFamily="@font/font2"
         android:textStyle="bold"
         android:padding="15dp"
-        android:backgroundTint="@color/buttonColor"
+        android:backgroundTint="@color/white"
         app:cornerRadius="10dp"
         app:icon="@drawable/google__1_"
         app:iconGravity="end"
