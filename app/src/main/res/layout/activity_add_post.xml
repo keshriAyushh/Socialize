@@ -47,18 +47,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btnAttachment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/matteBlack"
-        app:icon="@drawable/clip"
-        app:iconSize="20dp"
-        app:iconTint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPostLayout" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPost"
         android:layout_width="0dp"
@@ -71,13 +59,10 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:cornerRadius="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAttachment"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAttachment"
-        app:layout_constraintTop_toTopOf="@+id/btnAttachment"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPostLayout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCancel"

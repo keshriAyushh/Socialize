@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.socialize.R
 import com.example.socialize.activities.LoginActivity
 import com.example.socialize.activities.UpdateProfileActivity
 import com.example.socialize.databinding.FragmentProfileBinding
@@ -17,11 +18,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 
 class ProfileFragment : Fragment() {
@@ -29,10 +27,11 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    override fun onCreateView(
+   override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentProfileBinding.inflate(layoutInflater)
         auth = AuthUtil.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -42,7 +41,6 @@ class ProfileFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        initViews()
         binding.btnSignOut.setOnClickListener {
             auth.signOut()
             googleSignInClient.signOut()
@@ -56,26 +54,35 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun initViews() {
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onStart() {
+        super.onStart()
+        if(this@ProfileFragment.isVisible) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val task = StorageUtil.getUserById(AuthUtil.getInstance().currentUser!!.uid)
+                val user = task.await().toObject(User::class.java)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val task = StorageUtil.getUserById(AuthUtil.getInstance().currentUser!!.uid)
-            val user = task.await().toObject(User::class.java)
+                withContext(Dispatchers.Main) {
+                    if(user != null){
 
-            withContext(Dispatchers.Main) {
-                if(user != null){
-                    binding.tvName.text = user.name
-                    binding.tvEmail.text = user.email
-                    if(!user.gender.isNullOrEmpty()){
-                        binding.tvGender.text = user.gender
-                    } else {
-                        binding.tvGender.text = "Gender"
-                    }
+                        Glide.with(this@ProfileFragment)
+                            .load(user.imageUrl)
+                            .placeholder(R.drawable.account)
+                            .into(binding.ivProfilePicture)
 
-                    if(!user.age.isNullOrEmpty()){
-                        binding.tvAge.text = user.age
-                    } else {
-                        binding.tvAge.text = "Age"
+                        binding.tvName.text = user.name
+                        binding.tvEmail.text = user.email
+                        if(!user.gender.isNullOrEmpty()){
+                            binding.tvGender.text = user.gender
+                        } else {
+                            "Gender".also { binding.tvGender.text = it }
+                        }
+
+                        if(!user.age.isNullOrEmpty()){
+                            binding.tvAge.text = user.age
+                        } else {
+                            "Age".also { binding.tvAge.text = it }
+                        }
                     }
                 }
             }

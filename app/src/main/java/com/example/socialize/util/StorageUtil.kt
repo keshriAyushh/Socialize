@@ -70,9 +70,9 @@ object StorageUtil {
             val currentUserId = AuthUtil.getInstance().currentUser!!.uid
             val post = getPostId(postId).await().toObject(Post::class.java)
 
-             val isLiked = post?.likedBy?.contains(currentUserId)
+             val isLiked = post!!.likedBy.contains(currentUserId)
 
-            if(isLiked!!) {
+            if(isLiked) {
                 post.likedBy.remove(currentUserId)
             } else {
                 post.likedBy.add(currentUserId)

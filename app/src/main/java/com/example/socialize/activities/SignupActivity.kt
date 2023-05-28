@@ -13,6 +13,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -70,21 +73,15 @@ class SignupActivity : AppCompatActivity() {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                showSnackbar("Successfully Created!")
-                StorageUtil.addUserToDb(User(auth.currentUser?.uid!!, name, email))
+                Toast.makeText(this, "Successfully Created!", Toast.LENGTH_SHORT)
+                    .show()
+                StorageUtil.addUserToDb(User(auth.currentUser?.uid!!, name, email, null, null, auth.currentUser?.photoUrl.toString()))
                 startActivity(Intent(this@SignupActivity, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener {
-                showSnackbar("Sign up failed, please try again!")
+                Toast.makeText(this, "Sign up failed, please try again!", Toast.LENGTH_SHORT)
+                    .show()
             }
-    }
-
-    private fun showSnackbar(text: String) {
-        val snackbar =
-            Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT)
-
-        snackbar.setAction("Dismiss") { snackbar.dismiss() }
-        snackbar.show()
     }
 }

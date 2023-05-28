@@ -9,31 +9,30 @@
     tools:context=".fragments.ProfileFragment">
 
     <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
-        android:contentDescription="View/Update Profile Picture"
-        android:src="@drawable/account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/text_view"
         android:fontFamily="@font/font2"
         android:padding="15dp"
         android:text="@string/name"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivImage" />
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePicture" />
 
     <TextView
         android:id="@+id/tvEmail"
@@ -55,34 +54,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/text_view"
         android:fontFamily="@font/font2"
         android:padding="15dp"
         android:text="@string/gender"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toStartOf="@+id/tvAge"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
         app:layout_constraintTop_toBottomOf="@id/tvEmail" />
 
     <TextView
         android:id="@+id/tvAge"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:background="@drawable/text_view"
         android:fontFamily="@font/font2"
         android:padding="15dp"
         android:text="@string/age"
-        android:textSize="16sp"
         android:textColor="@color/white"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/tvGender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmail"
         app:layout_constraintStart_toEndOf="@+id/tvGender"
         app:layout_constraintTop_toTopOf="@id/tvGender"
         app:layout_constraintVertical_bias="0.0" />

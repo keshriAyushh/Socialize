@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.socialize.R
@@ -37,19 +38,24 @@ class PostsAdapter(
         holder.likeCount.text = model.likedBy.size.toString()
 
         Glide.with(holder.profilePicture.context).load(model.createdBy.imageUrl)
-            .circleCrop().into(holder.profilePicture)
+            .circleCrop()
+            .placeholder(ContextCompat.getDrawable(holder.profilePicture.context, R.drawable.account))
+            .into(holder.profilePicture)
 
         holder.shareBtn.setOnClickListener {
             listener.onShareButtonClicked(model)
         }
 
+        val isLiked = model.likedBy.contains(AuthUtil.getInstance().currentUser!!.uid)
+
+        if(isLiked) {
+            holder.likeBtn.setImageDrawable(ContextCompat.getDrawable(holder.likeBtn.context, R.drawable.heart2))
+        } else {
+            holder.likeBtn.setImageDrawable(ContextCompat.getDrawable(holder.likeBtn.context, R.drawable.heart))
+        }
+
+
         holder.likeBtn.setOnClickListener {
-            val isLiked = model.likedBy.contains(AuthUtil.getInstance().currentUser!!.uid)
-            if(isLiked) {
-                holder.likeBtn.setImageResource(R.drawable.heart2)
-            } else {
-                holder.likeBtn.setImageResource(R.drawable.heart)
-            }
             listener.onLikeButtonClicked(snapshots.getSnapshot(holder.adapterPosition).id)
         }
     }

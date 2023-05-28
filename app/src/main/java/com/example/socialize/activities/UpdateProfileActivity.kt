@@ -1,8 +1,12 @@
 package com.example.socialize.activities
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -17,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
 
 class UpdateProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateProfileBinding
@@ -25,6 +30,8 @@ class UpdateProfileActivity : AppCompatActivity() {
     private lateinit var name: String
     private lateinit var age: String
     private lateinit var gender: String
+    private val RC_SELECT_IMAGE: Int = 2
+    private var selectedImagePath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +49,18 @@ class UpdateProfileActivity : AppCompatActivity() {
                 GlobalScope.launch(Dispatchers.Main) {
                     val currentUser = StorageUtil.getUserById(auth.currentUser?.uid!!).await()
                         .toObject(User::class.java)
+                    if(!selectedImagePath.toString().isNotEmpty()) {
+                        val updatedUser = User(auth.currentUser?.uid!!, name, currentUser?.email, age, gender)
 
-                    val updatedUser = User(auth.currentUser?.uid!!, name, currentUser?.email, age, gender)
+                        StorageUtil.updateUser(auth.currentUser?.uid!!, updatedUser)
+                        finish()
+                    } else {
+                        val updatedUser = User(auth.currentUser?.uid!!, name, currentUser?.email, age, gender, selectedImagePath)
 
-                    StorageUtil.updateUser(auth.currentUser?.uid!!, updatedUser)
-                    finish()
+                        StorageUtil.updateUser(auth.currentUser?.uid!!, updatedUser)
+                        finish()
+                    }
+
                 }
             } else {
                 Toast.makeText(this@UpdateProfileActivity, "Fill in all the details!", Toast.LENGTH_SHORT)
@@ -58,9 +72,7 @@ class UpdateProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnUploadImage.setOnClickListener {
-            val intent = Intent()
-        }
+
     }
 
     private fun init() {
@@ -72,4 +84,5 @@ class UpdateProfileActivity : AppCompatActivity() {
     private fun initSpinner() {
         binding.tvGender.setAdapter(ArrayAdapter(this, R.layout.gender_list_item, resources.getStringArray(R.array.genders)))
     }
+
 }
