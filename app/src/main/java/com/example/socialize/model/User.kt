@@ -8,5 +8,6 @@ data class User(
     var email: String? = null,
     var age:  String? = null,
     var gender: String? = null,
-    var imageUrl: String? = null
+    var imageUrl: String? = null,
+    var likedPosts: ArrayList<Post> = arrayListOf()
 )

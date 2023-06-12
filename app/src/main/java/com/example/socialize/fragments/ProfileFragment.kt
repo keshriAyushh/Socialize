@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     if(user != null){
 
-                        Glide.with(this@ProfileFragment)
+                        Glide.with(requireContext())
                             .load(user.imageUrl)
                             .placeholder(R.drawable.account)
                             .into(binding.ivProfilePicture)

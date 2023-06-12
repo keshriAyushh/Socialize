@@ -22,13 +22,16 @@ class TimeUtil {
                 (diff / MINUTE_MILLIS).toString() + " minutes ago"
             } else if (diff < 90 * MINUTE_MILLIS) {
                 "an hour ago"
-            } else if (diff < 24 * HOUR_MILLIS) {
-                (diff / HOUR_MILLIS).toString() + " hours ago"
+            } else if (diff < 24 * HOUR_MILLIS && ((diff/ HOUR_MILLIS).toString().toInt() == 1)) {
+                (diff / HOUR_MILLIS).toString() + " hour ago"
+            } else if(diff < 24 * HOUR_MILLIS && ((diff/ HOUR_MILLIS) > 1)) {
+                (diff/ HOUR_MILLIS).toString() + " hours ago"
             } else if (diff < 48 * HOUR_MILLIS) {
                 "yesterday"
             } else {
                 (diff / DAY_MILLIS).toString() + " days ago"
             }
+
         }
 
 

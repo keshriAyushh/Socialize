@@ -30,7 +30,6 @@ class UpdateProfileActivity : AppCompatActivity() {
     private lateinit var name: String
     private lateinit var age: String
     private lateinit var gender: String
-    private val RC_SELECT_IMAGE: Int = 2
     private var selectedImagePath: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

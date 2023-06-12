@@ -25,6 +25,7 @@ object StorageUtil {
     fun getInstance() = storageInstance
 
     fun getPostCollection() = postCollection
+    fun getUsersCollection() = usersCollection
     fun addUserToDb(user: User?) {
         user?.let {
             GlobalScope.launch(Dispatchers.IO) {
@@ -63,25 +64,32 @@ object StorageUtil {
         return postCollection.document(postId).get()
     }
 
+    fun deletePost(postId: String) {
+        postCollection.document(postId).delete()
+    }
+
 
     fun updateLikes(postId: String) {
 
         GlobalScope.launch(Dispatchers.IO) {
             val currentUserId = AuthUtil.getInstance().currentUser!!.uid
+            val currentUser = getUserById(currentUserId).await().toObject(User::class.java)
             val post = getPostId(postId).await().toObject(Post::class.java)
 
              val isLiked = post!!.likedBy.contains(currentUserId)
 
             if(isLiked) {
                 post.likedBy.remove(currentUserId)
+                currentUser!!.likedPosts.remove(post)
             } else {
                 post.likedBy.add(currentUserId)
+                currentUser!!.likedPosts.add(post)
             }
             postCollection.document(postId).set(post)
+            updateUser(currentUserId, currentUser)
         }
 
     }
-
     fun updateUser(userId: String, user: User) {
         usersCollection.document(userId).set(user)
     }

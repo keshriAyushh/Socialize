@@ -1,5 +1,6 @@
 package com.example.socialize.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.socialize.R
 import com.example.socialize.activities.AddPostActivity
 import com.example.socialize.adapters.IPostAdapter
 import com.example.socialize.adapters.PostsAdapter
@@ -14,6 +16,7 @@ import com.example.socialize.databinding.FragmentPostsBinding
 import com.example.socialize.model.Post
 import com.example.socialize.util.StorageUtil
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.Query
 
 class PostsFragment: Fragment(), IPostAdapter {
@@ -68,6 +71,25 @@ class PostsFragment: Fragment(), IPostAdapter {
 
     override fun onLikeButtonClicked(postId: String) {
         StorageUtil.updateLikes(postId)
+    }
+
+    override fun onDeleteButtonClicker(postId: String) {
+
+        val dialogView = LayoutInflater.from(activity).inflate(R.layout.dialog_view, null)
+        val builder = AlertDialog.Builder(activity)
+            .setView(dialogView)
+            .show()
+        val btnYes = dialogView.findViewById<MaterialButton>(R.id.btnConfirm)
+        val btnNo = dialogView.findViewById<MaterialButton>(R.id.btnCancel)
+
+        btnYes.setOnClickListener {
+            StorageUtil.deletePost(postId)
+            builder.dismiss()
+        }
+
+        btnNo.setOnClickListener {
+            builder.dismiss()
+        }
     }
 
     override fun onShareButtonClicked(post: Post) {

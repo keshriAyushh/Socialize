@@ -58,6 +58,16 @@ class PostsAdapter(
         holder.likeBtn.setOnClickListener {
             listener.onLikeButtonClicked(snapshots.getSnapshot(holder.adapterPosition).id)
         }
+
+        if(model.createdBy.userId == AuthUtil.getInstance().uid) {
+            holder.deleteBtn.visibility = View.VISIBLE
+            holder.deleteBtn.setOnClickListener {
+                listener.onDeleteButtonClicker(snapshots.getSnapshot(holder.adapterPosition).id)
+            }
+        } else {
+            holder.deleteBtn.visibility = View.GONE
+        }
+
     }
 
     class PostViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -68,10 +78,13 @@ class PostsAdapter(
         val profilePicture: ShapeableImageView = itemView.findViewById(R.id.ivProfilePicture)
         val likeBtn: ImageView = itemView.findViewById(R.id.ivLike)
         val shareBtn: ShapeableImageView = itemView.findViewById(R.id.btnShare)
+        val deleteBtn: ShapeableImageView = itemView.findViewById(R.id.btnDelete)
     }
 }
 interface IPostAdapter {
     fun onLikeButtonClicked(postId: String)
 
     fun onShareButtonClicked(post: Post)
+
+    fun onDeleteButtonClicker(postId: String)
 }

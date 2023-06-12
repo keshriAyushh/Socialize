@@ -27,12 +27,17 @@
     <string name="post">Post</string>
     <string name="cancel">Cancel</string>
     <string name="update">Update</string>
+    <string name="liked">Liked</string>
     <string name="profile">Profile</string>
     <string name="upload_image">Upload Image</string>
     <string name="post_hint_text">What\'s on your mind?</string>
     <string name="posted_by">Posted by</string>
     <string name="posted_at">Posted at</string>
     <string name="like_count">COUNT</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="confirm_text">Are you sure you would like to delete your post?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
 </resources>
