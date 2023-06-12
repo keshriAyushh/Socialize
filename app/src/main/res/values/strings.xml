@@ -34,10 +34,12 @@
     <string name="posted_by">Posted by</string>
     <string name="posted_at">Posted at</string>
     <string name="like_count">COUNT</string>
-    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="confirm_deletion">Confirm deletion</string>
     <string name="confirm_text">Are you sure you would like to delete your post?</string>
+    <string name="confirm_text2">Are you sure you would like to delete your account?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="delete">Delete</string>
 
 
 </resources>

@@ -1,5 +1,7 @@
 package com.example.socialize.fragments
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import com.example.socialize.util.StorageUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -27,6 +30,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+   @SuppressLint("MissingInflatedId")
    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +55,30 @@ class ProfileFragment : Fragment() {
         binding.btnUpdate.setOnClickListener {
             startActivity(Intent(requireActivity(), UpdateProfileActivity::class.java))
         }
+
+       binding.btnDelete.setOnClickListener {
+           val dialogView = LayoutInflater.from(activity).inflate(R.layout.delete_user_dialog, null)
+           val builder = AlertDialog.Builder(activity)
+               .setView(dialogView)
+               .show()
+           val btnYes = dialogView.findViewById<MaterialButton>(R.id.btnYes)
+           val btnNo = dialogView.findViewById<MaterialButton>(R.id.btnNo)
+
+           btnYes.setOnClickListener {
+               StorageUtil.deleteUser(AuthUtil.getInstance().uid!!)
+               builder.dismiss()
+               googleSignInClient.signOut()
+               AuthUtil.getInstance().signOut()
+               AuthUtil.getInstance().currentUser?.delete()
+               
+               startActivity(Intent(requireContext(), LoginActivity::class.java))
+               requireActivity().finish()
+           }
+
+           btnNo.setOnClickListener {
+               builder.dismiss()
+           }
+       }
         return binding.root
     }
 

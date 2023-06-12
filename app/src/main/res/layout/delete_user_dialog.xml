@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/font2"
-        android:text="@string/confirm_text"
+        android:text="@string/confirm_text2"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/div" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnConfirm"
+        android:id="@+id/btnYes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -65,11 +65,11 @@
         android:layout_marginEnd="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnCancel"
+        app:layout_constraintStart_toEndOf="@+id/btnNo"
         app:layout_constraintTop_toBottomOf="@id/tvConfirmText" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCancel"
+        android:id="@+id/btnNo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/matteBlack"
@@ -82,11 +82,11 @@
         app:cornerRadius="10dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnConfirm"
-        app:layout_constraintEnd_toStartOf="@+id/btnConfirm"
+        app:layout_constraintBottom_toBottomOf="@+id/btnYes"
+        app:layout_constraintEnd_toStartOf="@+id/btnYes"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnConfirm"
+        app:layout_constraintTop_toTopOf="@+id/btnYes"
         app:layout_constraintVertical_bias="1.0" />
 
 

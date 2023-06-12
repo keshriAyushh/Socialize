@@ -15,9 +15,5 @@
         android:name="com.example.socialize.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/likesFragment"
-        android:name="com.example.socialize.fragments.LikesFragment"
-        android:label="fragment_likes"
-        tools:layout="@layout/fragment_likes" />
+
 </navigation>

@@ -33,7 +33,9 @@ object StorageUtil {
             }
         }
     }
-
+    fun deleteUser(userId: String) {
+        usersCollection.document(userId).delete()
+    }
     fun addPost(postText: String, context: Context) {
         val currentUserId = AuthUtil.getInstance().currentUser!!.uid
 
@@ -80,13 +82,11 @@ object StorageUtil {
 
             if(isLiked) {
                 post.likedBy.remove(currentUserId)
-                currentUser!!.likedPosts.remove(post)
             } else {
                 post.likedBy.add(currentUserId)
-                currentUser!!.likedPosts.add(post)
             }
             postCollection.document(postId).set(post)
-            updateUser(currentUserId, currentUser)
+            updateUser(currentUserId, currentUser!!)
         }
 
     }

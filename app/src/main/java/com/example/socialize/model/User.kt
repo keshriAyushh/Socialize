@@ -1,7 +1,5 @@
 package com.example.socialize.model
 
-import android.net.Uri
-
 data class User(
     var userId: String = "",
     var name: String? = null,
@@ -9,5 +7,4 @@ data class User(
     var age:  String? = null,
     var gender: String? = null,
     var imageUrl: String? = null,
-    var likedPosts: ArrayList<Post> = arrayListOf()
 )
